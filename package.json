@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.0.2",
+    "@studio-freight/lenis": "^1.0.29",
     "astro": "^4.0.2"
   }
 }

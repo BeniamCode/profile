@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+const power = "Power of Love";
+
+const identity ={
+    firstName: "Superman",
+    country: "Kansas",
+    ocuupation: "Hero",
+    hobbies: ["Saving people", "Cooking"]
+}
+
+const skills= ["flying","laser eyes","Super Strength"]
+
+const happy = true;
+const finished = false;
+const goal = 2;
+
+var skillColor
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+setInterval(function() {
+    skillColor = getRandomColor();
+    // Update the stylesheet or element style here
+}, 1000); // Change color every 1000 milliseconds (1 second)
+
+console.log("hello from the server")
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{power}</title>
+    <style define:vars={{skillColor}}>
+        h1 {
+          color: purple;
+          font-size: 4rem;
+        }
+        .skill{
+            color: var(--skillColor);
+            font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+    <a href="/">Home</a>
+<a href="/about/">About</a>
+    <h1>{power}</h1>
+    <p> My name is {identity.firstName} and I work as a {identity.ocuupation}. </p>
+    <p>Two of my hobbies are {identity.hobbies[0]} and {identity.hobbies[1]} </p>
+    <h3>my skills are</h3>
+    <ul>
+        {skills.map((skill) => <li class="skill"> {skill} </li> )}
+    </ul>
+    <h1>Not to forget, remember 2+2 is {x=> {var y=2; return y+3;}} </h1>
+
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+{finished && <p>I finished this tutorial!</p>}
+
+{goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+<script>
+    var skillColor = {r: 255, g: 0, b: 0}; // Starting color: red
+    
+    function updateColor() {
+        // Increment or decrement RGB values gradually
+        skillColor.r = (skillColor.r + 1) % 256;
+        skillColor.g = (skillColor.g + 2) % 256; // Change the increment rate for variation
+        skillColor.b = (skillColor.b + 3) % 256; // Change the increment rate for variation
+    
+        // Convert to HEX
+        var hexColor = "#" + ((1 << 24) + (skillColor.r << 16) + (skillColor.g << 8) + skillColor.b).toString(16).slice(1);
+        return hexColor;
+    }
+    
+    setInterval(function() {
+        var newColor = updateColor();
+        document.documentElement.style.setProperty('--skillColor', newColor);
+    }, 100); // Update color every 100 milliseconds
+
+    console.log("Hello from the client!");
+    </script>
+    
+</body>
+</html>
